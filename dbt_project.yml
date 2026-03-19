@@ -16,7 +16,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  Analytics:
+  dbt_repo:
     staging:
       +materialized: table
       +transient: true
