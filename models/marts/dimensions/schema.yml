@@ -1,0 +1,266 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: Customer dimension with loyalty tier enrichment
+    columns:
+      - name: customer_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Natural key from source
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - not_null
+
+  - name: dim_product
+    description: Product dimension with category and brand enrichment
+    columns:
+      - name: product_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_store
+    description: Store dimension with location details
+    columns:
+      - name: store_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_employee
+    description: Employee dimension
+    columns:
+      - name: employee_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: employee_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_supplier
+    description: Supplier dimension
+    columns:
+      - name: supplier_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: supplier_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: Date dimension
+    columns:
+      - name: date_dim_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_time
+    description: Time dimension
+    columns:
+      - name: time_dim_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: time_key
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_location
+    description: Location dimension
+    columns:
+      - name: location_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: location_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_category
+    description: Product category hierarchy dimension
+    columns:
+      - name: category_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: category_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_brand
+    description: Brand dimension
+    columns:
+      - name: brand_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: brand_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_promotion
+    description: Promotion dimension with campaign enrichment
+    columns:
+      - name: promotion_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: promotion_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_payment_method
+    description: Payment method dimension
+    columns:
+      - name: payment_method_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: payment_method_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_channel
+    description: Sales channel dimension
+    columns:
+      - name: channel_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: channel_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_loyalty_tier
+    description: Loyalty program tier dimension
+    columns:
+      - name: loyalty_tier_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: loyalty_tier_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_return_reason
+    description: Return reason dimension
+    columns:
+      - name: return_reason_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: return_reason_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_warehouse
+    description: Warehouse dimension with location
+    columns:
+      - name: warehouse_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: warehouse_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_currency
+    description: Currency dimension
+    columns:
+      - name: currency_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: currency_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_season
+    description: Season dimension
+    columns:
+      - name: season_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: season_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_device
+    description: Device type dimension
+    columns:
+      - name: device_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: device_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_campaign
+    description: Marketing campaign dimension
+    columns:
+      - name: campaign_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        tests:
+          - not_null
+          - unique

@@ -1,0 +1,158 @@
+version: 2
+
+sources:
+  - name: landing
+    database: LZ
+    schema: RAW
+    description: Raw retail data landing zone
+    tables:
+      - name: customers
+        description: Raw customer records
+        columns:
+          - name: customer_id
+            description: Primary key for customers
+      - name: products
+        description: Raw product catalog
+        columns:
+          - name: product_id
+            description: Primary key for products
+      - name: stores
+        description: Raw store information
+        columns:
+          - name: store_id
+            description: Primary key for stores
+      - name: employees
+        description: Raw employee records
+        columns:
+          - name: employee_id
+            description: Primary key for employees
+      - name: suppliers
+        description: Raw supplier information
+        columns:
+          - name: supplier_id
+            description: Primary key for suppliers
+      - name: dates
+        description: Pre-built date dimension source
+        columns:
+          - name: date_key
+            description: Surrogate key YYYYMMDD
+      - name: times
+        description: Time dimension source
+        columns:
+          - name: time_key
+            description: Surrogate key HHMM
+      - name: locations
+        description: Geographic location reference
+        columns:
+          - name: location_id
+            description: Primary key for locations
+      - name: categories
+        description: Product category hierarchy
+        columns:
+          - name: category_id
+            description: Primary key for categories
+      - name: brands
+        description: Product brand reference
+        columns:
+          - name: brand_id
+            description: Primary key for brands
+      - name: promotions
+        description: Promotion definitions
+        columns:
+          - name: promotion_id
+            description: Primary key for promotions
+      - name: payment_methods
+        description: Payment method reference
+        columns:
+          - name: payment_method_id
+            description: Primary key for payment methods
+      - name: channels
+        description: Sales channel reference
+        columns:
+          - name: channel_id
+            description: Primary key for channels
+      - name: loyalty_tiers
+        description: Loyalty program tiers
+        columns:
+          - name: loyalty_tier_id
+            description: Primary key for loyalty tiers
+      - name: return_reasons
+        description: Return reason codes
+        columns:
+          - name: return_reason_id
+            description: Primary key for return reasons
+      - name: warehouses
+        description: Warehouse locations
+        columns:
+          - name: warehouse_id
+            description: Primary key for warehouses
+      - name: currencies
+        description: Currency reference
+        columns:
+          - name: currency_id
+            description: Primary key for currencies
+      - name: seasons
+        description: Seasonal reference
+        columns:
+          - name: season_id
+            description: Primary key for seasons
+      - name: devices
+        description: Device type reference
+        columns:
+          - name: device_id
+            description: Primary key for devices
+      - name: campaigns
+        description: Marketing campaign records
+        columns:
+          - name: campaign_id
+            description: Primary key for campaigns
+      - name: orders
+        description: Sales order headers
+        columns:
+          - name: order_id
+            description: Primary key for orders
+      - name: order_items
+        description: Sales order line items
+        columns:
+          - name: order_item_id
+            description: Primary key for order items
+      - name: payments
+        description: Payment transactions
+        columns:
+          - name: payment_id
+            description: Primary key for payments
+      - name: returns
+        description: Return transactions
+        columns:
+          - name: return_id
+            description: Primary key for returns
+      - name: inventory_movements
+        description: Inventory movement log
+        columns:
+          - name: movement_id
+            description: Primary key for movements
+      - name: store_traffic
+        description: Store foot traffic data
+        columns:
+          - name: traffic_id
+            description: Primary key for traffic records
+      - name: promotions_applied
+        description: Promotions applied to orders
+        columns:
+          - name: promotion_applied_id
+            description: Primary key
+      - name: customer_interactions
+        description: Customer interaction events
+        columns:
+          - name: interaction_id
+            description: Primary key for interactions
+      - name: supplier_orders
+        description: Purchase orders to suppliers
+        columns:
+          - name: supplier_order_id
+            description: Primary key for supplier orders
+      - name: loyalty_transactions
+        description: Loyalty point transactions
+        columns:
+          - name: loyalty_txn_id
+            description: Primary key for loyalty transactions

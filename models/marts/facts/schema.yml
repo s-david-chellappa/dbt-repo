@@ -1,0 +1,212 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: Order fact table with financial calculations (incremental merge)
+    columns:
+      - name: order_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: Natural key
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: store_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: channel_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channel')
+                field: channel_id
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['PENDING', 'PROCESSING', 'COMPLETED', 'CANCELLED', 'RETURNED']
+
+  - name: fct_order_items
+    description: Order line item fact table (incremental merge)
+    columns:
+      - name: order_item_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+  - name: fct_payments
+    description: Payment fact table (incremental merge)
+    columns:
+      - name: payment_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: payment_id
+        tests:
+          - not_null
+          - unique
+      - name: payment_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['COMPLETED', 'PENDING', 'REFUNDED', 'FAILED']
+
+  - name: fct_returns
+    description: Returns fact table (incremental merge)
+    columns:
+      - name: return_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: return_id
+        tests:
+          - not_null
+          - unique
+      - name: return_reason_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_return_reason')
+                field: return_reason_id
+  - name: fct_inventory_movements
+    description: Inventory movement log (incremental append)
+    columns:
+      - name: movement_key
+        description: Surrogate key
+        tests:
+          - not_null
+      - name: movement_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: movement_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['RECEIPT', 'SHIPMENT', 'TRANSFER', 'ADJUSTMENT', 'RETURN']
+
+  - name: fct_store_traffic
+    description: Store foot traffic events (incremental append)
+    columns:
+      - name: traffic_key
+        description: Surrogate key
+        tests:
+          - not_null
+      - name: traffic_id
+        tests:
+          - not_null
+      - name: store_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+  - name: fct_promotions_applied
+    description: Promotion usage on orders (incremental merge)
+    columns:
+      - name: promotion_applied_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: promotion_applied_id
+        tests:
+          - not_null
+          - unique
+      - name: promotion_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_promotion')
+                field: promotion_id
+  - name: fct_customer_interactions
+    description: Customer interaction events (incremental append)
+    columns:
+      - name: interaction_key
+        description: Surrogate key
+        tests:
+          - not_null
+      - name: interaction_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: interaction_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['PAGE_VIEW', 'ADD_TO_CART', 'PURCHASE', 'SEARCH', 'REVIEW', 'SUPPORT_TICKET']
+
+  - name: fct_supplier_orders
+    description: Supplier purchase orders (incremental merge)
+    columns:
+      - name: supplier_order_key
+        description: Surrogate key
+        tests:
+          - not_null
+          - unique
+      - name: supplier_order_id
+        tests:
+          - not_null
+          - unique
+      - name: supplier_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_supplier')
+                field: supplier_id
+  - name: fct_loyalty_transactions
+    description: Loyalty point transactions (incremental append)
+    columns:
+      - name: loyalty_txn_key
+        description: Surrogate key
+        tests:
+          - not_null
+      - name: loyalty_txn_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: transaction_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['EARN', 'REDEEM', 'EXPIRE']

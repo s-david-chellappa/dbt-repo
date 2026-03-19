@@ -1,0 +1,19 @@
+SELECT
+    date_key,
+    full_date,
+    day_of_week,
+    day_name,
+    day_of_month,
+    day_of_year,
+    week_of_year,
+    month_number,
+    month_name,
+    quarter_number,
+    year_number,
+    is_weekend,
+    is_holiday,
+    fiscal_year,
+    fiscal_quarter,
+    created_at,
+    updated_at
+FROM {{ source('landing', 'dates') }}

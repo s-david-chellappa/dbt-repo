@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: agg_daily_sales
+    description: Daily aggregated sales metrics across all stores and channels
+    columns:
+      - name: date_key
+        description: Date dimension key YYYYMMDD
+        tests:
+          - not_null
+          - unique
+      - name: full_date
+        description: Calendar date
+        tests:
+          - not_null
+      - name: total_orders
+        description: Count of distinct orders for the day
+      - name: net_sales
+        description: Total net sales after discounts plus tax and shipping
+      - name: avg_order_value
+        description: Average order value for the day
+
+  - name: agg_monthly_revenue
+    description: Monthly aggregated revenue with return adjustments
+    columns:
+      - name: year_month
+        description: Year-month identifier YYYY-MM
+        tests:
+          - not_null
+          - unique
+      - name: net_revenue
+        description: Net revenue after discounts
+      - name: adjusted_revenue
+        description: Net revenue minus refunds
+      - name: return_rate_pct
+        description: Return rate as percentage of orders
+
+  - name: agg_store_performance
+    description: Store-level performance metrics
+    columns:
+      - name: store_id
+        description: Store identifier
+        tests:
+          - not_null
+          - unique
+      - name: store_name
+        description: Store display name
+        tests:
+          - not_null
+      - name: net_sales
+        description: Total net sales for the store
+      - name: revenue_per_sqft
+        description: Revenue efficiency metric
+      - name: conversion_rate_pct
+        description: Order conversion from visitors
+
+  - name: agg_product_performance
+    description: Product-level performance with profitability metrics
+    columns:
+      - name: product_id
+        description: Product identifier
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: Product display name
+        tests:
+          - not_null
+      - name: total_revenue
+        description: Total revenue from product sales
+      - name: gross_margin_pct
+        description: Gross margin as percentage
+      - name: return_rate_pct
+        description: Return rate as percentage of orders
+
+  - name: agg_customer_lifetime_value
+    description: Customer-level lifetime value and engagement metrics
+    columns:
+      - name: customer_id
+        description: Customer identifier
+        tests:
+          - not_null
+          - unique
+      - name: full_name
+        description: Customer full name
+      - name: lifetime_net_spend
+        description: Total net spend over customer lifetime
+      - name: adjusted_lifetime_value
+        description: Lifetime value adjusted for refunds
+      - name: avg_order_value
+        description: Average order value
+      - name: days_since_last_order
+        description: Recency metric

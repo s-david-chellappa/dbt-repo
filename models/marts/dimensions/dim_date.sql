@@ -1,0 +1,21 @@
+SELECT
+    {{ generate_surrogate_key(['date_key']) }} AS date_dim_key,
+    date_key,
+    full_date,
+    day_of_week,
+    day_name,
+    day_of_month,
+    day_of_year,
+    week_of_year,
+    month_number,
+    month_name,
+    quarter_number,
+    year_number,
+    is_weekend,
+    is_holiday,
+    fiscal_year,
+    fiscal_quarter,
+    year_number || '-Q' || quarter_number AS year_quarter,
+    year_number || '-' || LPAD(month_number, 2, '0') AS year_month,
+    updated_at
+FROM {{ ref('stg_landing__dates') }}

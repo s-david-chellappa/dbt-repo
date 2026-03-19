@@ -1,0 +1,313 @@
+version: 2
+
+models:
+  - name: stg_landing__customers
+    description: Staged customer data from landing zone
+    columns:
+      - name: customer_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: email
+        description: Customer email address
+        tests:
+          - not_null
+      - name: loyalty_tier_id
+        description: FK to loyalty tiers
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_landing__loyalty_tiers')
+                field: loyalty_tier_id
+  - name: stg_landing__products
+    description: Staged product data from landing zone
+    columns:
+      - name: product_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: category_id
+        description: FK to categories
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_landing__categories')
+                field: category_id
+      - name: brand_id
+        description: FK to brands
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_landing__brands')
+                field: brand_id
+  - name: stg_landing__stores
+    description: Staged store data from landing zone
+    columns:
+      - name: store_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: location_id
+        description: FK to locations
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_landing__locations')
+                field: location_id
+  - name: stg_landing__employees
+    description: Staged employee data
+    columns:
+      - name: employee_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__suppliers
+    description: Staged supplier data
+    columns:
+      - name: supplier_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__dates
+    description: Staged date dimension data
+    columns:
+      - name: date_key
+        description: Primary key YYYYMMDD
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__times
+    description: Staged time dimension data
+    columns:
+      - name: time_key
+        description: Primary key HHMM
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__locations
+    description: Staged location data
+    columns:
+      - name: location_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__categories
+    description: Staged category hierarchy data
+    columns:
+      - name: category_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__brands
+    description: Staged brand data
+    columns:
+      - name: brand_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__promotions
+    description: Staged promotion data
+    columns:
+      - name: promotion_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__payment_methods
+    description: Staged payment method data
+    columns:
+      - name: payment_method_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__channels
+    description: Staged channel data
+    columns:
+      - name: channel_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__loyalty_tiers
+    description: Staged loyalty tier data
+    columns:
+      - name: loyalty_tier_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__return_reasons
+    description: Staged return reason data
+    columns:
+      - name: return_reason_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__warehouses
+    description: Staged warehouse data
+    columns:
+      - name: warehouse_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__currencies
+    description: Staged currency data
+    columns:
+      - name: currency_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__seasons
+    description: Staged season data
+    columns:
+      - name: season_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__devices
+    description: Staged device data
+    columns:
+      - name: device_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__campaigns
+    description: Staged campaign data
+    columns:
+      - name: campaign_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__orders
+    description: Staged order header data
+    columns:
+      - name: order_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['PENDING', 'PROCESSING', 'COMPLETED', 'CANCELLED', 'RETURNED']
+
+  - name: stg_landing__order_items
+    description: Staged order line item data
+    columns:
+      - name: order_item_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+
+  - name: stg_landing__payments
+    description: Staged payment data
+    columns:
+      - name: payment_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__returns
+    description: Staged return data
+    columns:
+      - name: return_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__inventory_movements
+    description: Staged inventory movement data
+    columns:
+      - name: movement_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__store_traffic
+    description: Staged store traffic data
+    columns:
+      - name: traffic_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__promotions_applied
+    description: Staged promotions applied data
+    columns:
+      - name: promotion_applied_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__customer_interactions
+    description: Staged customer interaction data
+    columns:
+      - name: interaction_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__supplier_orders
+    description: Staged supplier order data
+    columns:
+      - name: supplier_order_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_landing__loyalty_transactions
+    description: Staged loyalty transaction data
+    columns:
+      - name: loyalty_txn_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
